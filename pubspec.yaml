@@ -29,6 +29,7 @@ dependencies:
   path_provider: ^2.0.3
   permission_handler: ^8.1.6
   assets_audio_player: ^3.0.3+6
+  vibrate: ^0.0.4
 
 dev_dependencies:
   flutter_test:

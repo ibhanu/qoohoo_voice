@@ -81,16 +81,16 @@ class _AudioItemState extends State<AudioItem>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
       child: Container(
         padding: const EdgeInsets.all(8.0),
-        height: 70,
+        height: 60,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            bottomRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
+            topRight: Radius.circular(10),
+            bottomRight: Radius.circular(10),
+            topLeft: Radius.circular(10),
           ),
         ),
         child: Row(
