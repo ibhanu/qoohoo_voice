@@ -136,7 +136,10 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                                     backgroundColor:
                                         Theme.of(context).primaryColor,
                                     radius: 28,
-                                    child: Icon(Icons.lock)),
+                                    child: Icon(
+                                      Icons.lock,
+                                      color: Colors.white,
+                                    )),
                               ),
                             ],
                           ),

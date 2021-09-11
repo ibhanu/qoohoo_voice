@@ -103,7 +103,9 @@ class _AudioItemState extends State<AudioItem>
                 child: AnimatedIcon(
                   progress: _controller,
                   icon: AnimatedIcons.play_pause,
+                  color: Colors.white,
                 ),
+                backgroundColor: Theme.of(context).accentColor,
               ),
             ),
             SizedBox(
@@ -116,10 +118,10 @@ class _AudioItemState extends State<AudioItem>
                   Expanded(
                     child: SliderTheme(
                       data: SliderThemeData(
-                        thumbColor: Colors.green,
-                        thumbShape:
-                            RoundSliderThumbShape(enabledThumbRadius: 7),
-                      ),
+                          thumbColor: Colors.green,
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 7),
+                          activeTrackColor: Theme.of(context).accentColor),
                       child: Slider(
                         value: position.inMilliseconds.toDouble() ?? 0.0,
                         onChanged: (double value) {
