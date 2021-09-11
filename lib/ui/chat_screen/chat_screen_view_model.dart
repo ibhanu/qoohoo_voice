@@ -88,8 +88,8 @@ class ChatScreenViewModel extends BaseViewModel {
         secondsStr = '00';
         notifyListeners();
       }
-    } on Exception catch (e) {
-      print(e);
+    } catch (e) {
+      log(e);
     }
   }
 

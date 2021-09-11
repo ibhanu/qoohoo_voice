@@ -51,7 +51,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
     super.initState();
   }
 
-  init() {
+  initButton() {
     setState(() {
       offset = Offset(182, 62);
     });
@@ -112,7 +112,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                                           ),
                                           onPressed: () {
                                             _controller.animateBack(1);
-                                            init();
+                                            initButton();
                                             model.setLock(false);
                                           },
                                         ),
@@ -151,7 +151,6 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                           top: offset.dy,
                           child: GestureDetector(
                             onLongPressStart: (_) {
-                              print('long start');
                               _controller.animateTo(1.5,
                                   duration: Duration(milliseconds: 400),
                                   curve: Curves.linear);
@@ -159,12 +158,8 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                               model.startRecording();
                             },
                             onLongPressEnd: (_) {
-                              print('long end');
-
                               if (!model.isLock) {
-                                setState(() {
-                                  init();
-                                });
+                                initButton();
                                 _controller.animateBack(0,
                                     duration: Duration(milliseconds: 400),
                                     curve: Curves.bounceOut);
@@ -172,9 +167,6 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                               }
                             },
                             onLongPressMoveUpdate: (details) {
-                              print(details.globalPosition.dx);
-                              print(details.globalPosition.dx / 400);
-
                               if (details.globalPosition.dx / 400 > 0.75) {
                                 setState(() {
                                   offset = Offset(355, offset.dy);
@@ -182,28 +174,13 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                                 model.setLock(true);
                               } else if (details.globalPosition.dx / 400 <
                                   0.43) {
-                                init();
+                                initButton();
                               } else
                                 setState(() {
                                   offset = Offset(
                                       details.globalPosition.dx, offset.dy);
                                 });
                             },
-                            // onHorizontalDragUpdate: (details) {
-                            //   print(details.delta.dx);
-                            //   setState(() {
-                            //     offset = Offset(
-                            //         offset.dx + details.delta.dx, offset.dy);
-                            //   });
-                            // },
-                            // onLongPressStart: (_) {
-                            //   _controller.reverse();
-                            //   model.startRecording();
-                            // },
-                            // onLongPressEnd: (_) {
-                            //   _controller.forward();
-                            //   model.stopRecording();
-                            // },
                             child: Transform.scale(
                               scale: 0 + _controller.value,
                               child: CircleAvatar(

@@ -16,6 +16,8 @@ class _AudioItemState extends State<AudioItem>
   AnimationController _controller;
   final assetsAudioPlayer = AssetsAudioPlayer();
 
+  double radius = 10;
+
   Duration duration = Duration();
   Duration position = Duration();
   bool isPlaying = false;
@@ -86,61 +88,66 @@ class _AudioItemState extends State<AudioItem>
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(10),
-            bottomRight: Radius.circular(10),
-            topLeft: Radius.circular(10),
+            topRight: Radius.circular(radius),
+            bottomRight: Radius.circular(radius),
+            topLeft: Radius.circular(radius),
           ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            GestureDetector(
-              onTap: () {
-                !isPlaying ? _start() : _pause();
-              },
-              child: CircleAvatar(
-                child: AnimatedIcon(
-                  progress: _controller,
-                  icon: AnimatedIcons.play_pause,
-                  color: Colors.white,
-                ),
-                backgroundColor: Theme.of(context).accentColor,
-              ),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Text(positionText),
-                  Expanded(
-                    child: SliderTheme(
-                      data: SliderThemeData(
-                          thumbColor: Colors.green,
-                          thumbShape:
-                              RoundSliderThumbShape(enabledThumbRadius: 7),
-                          activeTrackColor: Theme.of(context).accentColor),
-                      child: Slider(
-                        value: position.inMilliseconds.toDouble() ?? 0.0,
-                        onChanged: (double value) {
-                          setState(() {
-                            position = Duration(milliseconds: value.toInt());
-                          });
-                          assetsAudioPlayer.seek(position, force: true);
-                        },
-                        min: 0.0,
-                        max: duration.inMilliseconds.toDouble(),
-                      ),
-                    ),
-                  ),
-                  Text(durationText),
-                ],
-              ),
-            ),
+            _buildPlayerControl(context),
+            SizedBox(width: 5),
+            _buildPlayerInfo(context),
           ],
         ),
+      ),
+    );
+  }
+
+  Expanded _buildPlayerInfo(BuildContext context) {
+    return Expanded(
+      child: Row(
+        children: [
+          Text(positionText),
+          Expanded(
+            child: SliderTheme(
+              data: SliderThemeData(
+                  thumbColor: Colors.green,
+                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 7),
+                  activeTrackColor: Theme.of(context).accentColor),
+              child: Slider(
+                value: position.inMilliseconds.toDouble() ?? 0.0,
+                onChanged: (double value) {
+                  setState(() {
+                    position = Duration(milliseconds: value.toInt());
+                  });
+                  assetsAudioPlayer.seek(position, force: true);
+                },
+                min: 0.0,
+                max: duration.inMilliseconds.toDouble(),
+              ),
+            ),
+          ),
+          Text(durationText),
+        ],
+      ),
+    );
+  }
+
+  GestureDetector _buildPlayerControl(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        !isPlaying ? _start() : _pause();
+      },
+      child: CircleAvatar(
+        child: AnimatedIcon(
+          progress: _controller,
+          icon: AnimatedIcons.play_pause,
+          color: Colors.white,
+        ),
+        backgroundColor: Theme.of(context).accentColor,
       ),
     );
   }
