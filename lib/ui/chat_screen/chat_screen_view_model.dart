@@ -78,8 +78,8 @@ class ChatScreenViewModel extends BaseViewModel {
       if (!_isLock) {
         var result = await _audioRecorder.stop();
         Vibrate.feedback(FeedbackType.light);
-        recordingList.insert(0, result);
-        listKey.currentState.insertItem(0);
+        recordingList.add(result);
+        listKey.currentState.insertItem(recordingList.length - 1);
         setIsRecording(false);
         timerSubscription.cancel();
         timerStream = null;

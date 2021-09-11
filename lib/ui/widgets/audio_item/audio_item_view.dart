@@ -27,7 +27,6 @@ class _AudioItemState extends State<AudioItem>
       position != null ? position.toString().split('.').first : '';
 
   _start() {
-    log('start');
     setState(() {
       assetsAudioPlayer.play();
       _controller.forward();
@@ -41,7 +40,6 @@ class _AudioItemState extends State<AudioItem>
   }
 
   _pause() {
-    log('pause');
     setState(() {
       assetsAudioPlayer.pause();
       _controller.reverse();

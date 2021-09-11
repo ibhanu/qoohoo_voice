@@ -6,7 +6,6 @@ import 'package:stacked/stacked.dart';
 class ChatScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print('test');
     return SafeArea(
       child: ViewModelBuilder<ChatScreenViewModel>.reactive(
           viewModelBuilder: () => ChatScreenViewModel(),
