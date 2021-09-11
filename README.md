@@ -1,4 +1,4 @@
-# qoohoo_voice
+# Qoohoo Voice Recorder
 
 A new Flutter project.
 
